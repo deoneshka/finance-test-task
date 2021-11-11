@@ -1,0 +1,97 @@
+@import '../../styles/shared.scss';
+
+.tickers {
+  &__title {
+    font-weight: 700;
+    @include font(36px, 48px);
+    text-align: center;
+    letter-spacing: 0.03em;
+    color: $primary-font-color;
+    padding-top: 30px;
+  }
+
+  &__list {
+    margin-top: 70px;
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__item:not(:last-child) {
+    margin-bottom: 20px;
+  }
+}
+
+.tickers-item {
+  min-width: 90px;
+  text-align: right;
+  position: relative;
+  padding-top: 3px;
+  padding-bottom: 3px;
+
+  &__button {
+    position: relative;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: none;
+    background-color: $primary-button-color;
+    box-shadow: 0px 3px 7px rgba(78, 99, 219, 0.5);
+  }
+
+  &__ticker {
+    color: $secondary-font-color;
+    max-width: 50px;
+    text-align: center;
+    border-radius: 6px;
+  }
+
+  &__name {
+    text-align: start;
+  }
+
+  &__percent {
+    position: relative;
+  }
+
+  &__icon {
+    width: 18px;
+    height: 18px;
+    position: absolute;
+    top: 2px;
+  }
+}
+
+.tickers-item_color {
+  &_up {
+    color: $color-up;
+  }
+
+  &_down {
+    color: $color-down;
+  }
+}
+
+.tickers-item__icon_color {
+  &_up {
+    fill: $color-up;
+  }
+
+  &_down {
+    fill: $color-down;
+  }
+}
+
+.tickers-button {
+  &__icon {
+    width: 12px;
+    height: 12px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}

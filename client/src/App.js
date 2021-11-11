@@ -1,25 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchTickers } from './redux/tickers/tickers-operations';
+import { getLoading } from './redux/tickers/tickers-selectors';
+import Container from './components/Container';
+import TickersList from './components/TickersList';
 
-function App() {
+export default function App() {
+  const dispatch = useDispatch();
+  const isLoading = useSelector(getLoading);
+
+  useEffect(() => {
+    dispatch(fetchTickers());
+  }, [dispatch]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Container>
+      {isLoading && <h2>Подключаемся к серверу</h2>}
+      {!isLoading && <TickersList />}
+    </Container>
   );
 }
-
-export default App;
