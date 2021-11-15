@@ -1,26 +1,47 @@
 import { combineReducers } from 'redux';
 import { createReducer } from '@reduxjs/toolkit';
 import {
-  // initTickersRequest,
+  initTickersRequest,
   initTickersSuccess,
-  // initTickersError,
+  initTickersError,
+  changeFilter,
+  addToFavorite,
+  removeFromFavorite,
+  changeToogle,
 } from './tickers-actions';
 
 const tickers = createReducer([], {
   [initTickersSuccess]: (_, { payload }) => payload,
 });
 
-// const loading = createReducer(false, {
-//   [initTickersRequest]: () => true,
-//   [initTickersSuccess]: () => false,
-//   [initTickersError]: () => false,
-// });
+const filter = createReducer('', {
+  [changeFilter]: (_, { payload }) => payload,
+});
+
+const favorite = createReducer([], {
+  [addToFavorite]: (state, { payload }) => [...state, payload],
+  [removeFromFavorite]: (state, { payload }) => {
+    const index = state.indexOf(payload);
+    state.splice(index, 1);
+
+    return state;
+  },
+});
+
+const loading = createReducer(false, {
+  [initTickersRequest]: () => true,
+  [initTickersSuccess]: () => false,
+  [initTickersError]: () => false,
+});
+
+const toggle = createReducer('all', {
+  [changeToogle]: (_, { payload }) => payload,
+});
 
 export default combineReducers({
   tickers,
+  filter,
+  loading,
+  favorite,
+  toggle,
 });
-
-// export default combineReducers({
-//   tickers,
-//   loading,
-// });

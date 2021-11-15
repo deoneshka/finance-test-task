@@ -8,6 +8,12 @@
     letter-spacing: 0.03em;
     color: $primary-font-color;
     padding-top: 30px;
+    margin-bottom: 30px;
+  }
+
+  &__wrapper {
+    display: flex;
+    justify-content: space-between;
   }
 
   &__list {
@@ -38,8 +44,8 @@
     height: 24px;
     border-radius: 50%;
     border: none;
-    background-color: $primary-button-color;
-    box-shadow: 0px 3px 7px rgba(78, 99, 219, 0.5);
+    cursor: pointer;
+    transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   &__ticker {
@@ -72,6 +78,44 @@
 
   &_down {
     color: $color-down;
+  }
+}
+
+.tickers-item__button {
+  &_color_add {
+    background-color: $primary-button-color;
+    box-shadow: 0px 3px 7px rgba(78, 99, 219, 0.5);
+  }
+
+  &_color_remove {
+    background-color: $secondary-button-color;
+    box-shadow: 0px 3px 7px rgba(194, 52, 69, 0.5);
+  }
+}
+
+.tickers-item__ticker {
+  &_apple {
+    background-color: #15b312;
+  }
+
+  &_alphabet {
+    background-color: #cf2746;
+  }
+
+  &_microsoft {
+    background-color: #27cfcf;
+  }
+
+  &_amazon {
+    background-color: #121102;
+  }
+
+  &_facebook {
+    background-color: #2b09b5;
+  }
+
+  &_tesla {
+    background-color: #b59009;
   }
 }
 

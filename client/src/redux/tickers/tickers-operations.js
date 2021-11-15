@@ -8,7 +8,6 @@ import socket from '../../socket/socket';
 const fetchTickers = () => dispatch => {
   dispatch(initTickersRequest());
   socket.emit('start');
-  console.log(socket);
   socket.on('ticker', tickers => dispatch(initTickersSuccess(tickers)));
 };
 
