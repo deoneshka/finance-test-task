@@ -26,3 +26,21 @@ body {
   width: 1px !important;
   overflow: hidden;
 }
+
+.loader,
+.error {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}
+
+.loader {
+  margin-top: -100px;
+  margin-left: -100px;
+}
+
+.error {
+  display: block;
+  margin-top: -14px;
+  margin-left: -130px;
+}

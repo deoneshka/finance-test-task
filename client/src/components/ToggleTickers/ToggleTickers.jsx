@@ -1,6 +1,9 @@
 import { useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { changeToogle } from '../../redux/tickers/tickers-actions';
+import {
+  changeToogle,
+  changeFilter,
+} from '../../redux/tickers/tickers-actions';
 import { getToggle } from '../../redux/tickers/tickers-selectors';
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
@@ -8,17 +11,20 @@ import './ToggleTickers';
 
 export default function ToogleTickers() {
   const dispatch = useDispatch();
-  const value = useSelector(getToggle);
+  const toggleValue = useSelector(getToggle);
 
   const handleChange = useCallback(
-    e => dispatch(changeToogle(e.target.value)),
+    e => {
+      dispatch(changeToogle(e.target.value));
+      dispatch(changeFilter(''));
+    },
     [dispatch],
   );
 
   return (
     <ToggleButtonGroup
       color="primary"
-      value={value}
+      value={toggleValue}
       exclusive
       onChange={handleChange}
     >

@@ -15,6 +15,7 @@ export const getAllTickers = state => state.tickers.tickers;
 export const getFilter = state => state.tickers.filter;
 export const getFavorite = state => state.tickers.favorite;
 export const getToggle = state => state.tickers.toggle;
+export const getError = state => state.tickers.error;
 
 export const getUpdatedTickers = createSelector([getAllTickers], tickers =>
   tickers
@@ -47,20 +48,21 @@ export const getUpdatedTickers = createSelector([getAllTickers], tickers =>
     .sort((a, b) => (a.name < b.name ? -1 : 1)),
 );
 
+export const getFavoriteTickers = createSelector(
+  [getUpdatedTickers, getFavorite],
+  (tickers, favoriteTickers) => {
+    return tickers.filter(({ ticker }) => favoriteTickers.includes(ticker));
+  },
+);
+
 export const getVisibleTickers = createSelector(
-  [getUpdatedTickers, getFilter],
-  (tickers, filter) => {
+  [getUpdatedTickers, getFavoriteTickers, getFilter, getToggle],
+  (allTickers, favoriteTickers, filter, toggle) => {
     const normalizedFilter = filter.toLowerCase();
+    const tickers = toggle === 'all' ? allTickers : favoriteTickers;
 
     return tickers.filter(({ name }) =>
       name.toLowerCase().includes(normalizedFilter),
     );
-  },
-);
-
-export const getFavoriteTickers = createSelector(
-  [getVisibleTickers, getFavorite],
-  (tickers, favoriteTickers) => {
-    return tickers.filter(({ ticker }) => favoriteTickers.includes(ticker));
   },
 );

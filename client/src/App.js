@@ -1,13 +1,15 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import Loader from 'react-loader-spinner';
 import { fetchTickers } from './redux/tickers/tickers-operations';
-import { getLoading } from './redux/tickers/tickers-selectors';
+import { getLoading, getError } from './redux/tickers/tickers-selectors';
 import Container from './components/Container';
 import TickersList from './components/TickersList';
 
 export default function App() {
   const dispatch = useDispatch();
   const isLoading = useSelector(getLoading);
+  const isError = useSelector(getError);
 
   useEffect(() => {
     dispatch(fetchTickers());
@@ -15,8 +17,17 @@ export default function App() {
 
   return (
     <Container>
-      {isLoading && <h2>Подключаемся к серверу</h2>}
-      {!isLoading && <TickersList />}
+      {isLoading && (
+        <Loader
+          className="loader"
+          type="Audio"
+          color="#00BFFF"
+          height={200}
+          width={200}
+        />
+      )}
+      {!isLoading && !isError && <TickersList />}
+      {isError && <h2 className="error">Server connection error.</h2>}
     </Container>
   );
 }

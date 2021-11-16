@@ -5,7 +5,6 @@ import {
   getVisibleTickers,
   getAllTickers,
   getFavorite,
-  getFavoriteTickers,
   getToggle,
 } from '../../redux/tickers/tickers-selectors';
 import {
@@ -22,7 +21,6 @@ export default function TickersList() {
   const allTickers = useSelector(getAllTickers);
   const visibleTickers = useSelector(getVisibleTickers);
   const favoriteList = useSelector(getFavorite);
-  const favoriteTickers = useSelector(getFavoriteTickers);
   const toggleValue = useSelector(getToggle);
 
   const changeStatus = useCallback(
@@ -60,9 +58,9 @@ export default function TickersList() {
       {allTickers.length > 0 && (
         <>
           <h2 className="tickers__title">
-            {visibleTickers.length > 0
-              ? `Last trade time: ${visibleTickers[0].last_trade_time}`
-              : 'There are no companies with that name.'}
+            {visibleTickers.length === 0
+              ? 'There are no companies.'
+              : `Last trade time: ${visibleTickers[0].last_trade_time}`}
           </h2>
           <div className="tickers__wrapper">
             <ToggleTickers />
@@ -76,7 +74,7 @@ export default function TickersList() {
         </>
       )}
       <ul className="list tickers__list">
-        {(toggleValue === 'all' ? visibleTickers : favoriteTickers).map(
+        {visibleTickers.map(
           ({ ticker, name, price, change, change_percent }) => (
             <li className="tickers__item" key={ticker}>
               <button

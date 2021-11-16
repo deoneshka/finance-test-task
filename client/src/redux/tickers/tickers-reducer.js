@@ -28,7 +28,7 @@ const favorite = createReducer([], {
   },
 });
 
-const loading = createReducer(false, {
+const loading = createReducer(true, {
   [initTickersRequest]: () => true,
   [initTickersSuccess]: () => false,
   [initTickersError]: () => false,
@@ -38,10 +38,16 @@ const toggle = createReducer('all', {
   [changeToogle]: (_, { payload }) => payload,
 });
 
+const error = createReducer(false, {
+  [initTickersError]: () => true,
+  [initTickersSuccess]: () => false,
+});
+
 export default combineReducers({
   tickers,
   filter,
   loading,
   favorite,
   toggle,
+  error,
 });
